@@ -16,7 +16,7 @@ resource "aws_security_group" "webserver" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 	
     ingress {
@@ -26,11 +26,11 @@ resource "aws_security_group" "webserver" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    egress { # MySQL
-        from_port = 3306
-        to_port = 3306
+    egress { # All Traffic
+        from_port = 0
+        to_port = 65535
         protocol = "tcp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     vpc_id = "${aws_vpc.default.id}"

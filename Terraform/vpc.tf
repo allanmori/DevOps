@@ -75,3 +75,4 @@ resource "aws_route_table_association" "us-east-1-private" {
     subnet_id = "${aws_subnet.us-east-1-private.id}"
     route_table_id = "${aws_route_table.us-east-1-private.id}"
 }
+
