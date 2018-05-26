@@ -1,7 +1,5 @@
 ## Criar uma infraestrutura na Amazon AWS utilizando o Terraform
-   * Subir a VPC com Nat Gateway
-   * Subir 3 instâncias EC2 t2.micro com EBS attached de 20GB na rede pública
-   * Subir 3 instâncias EC2 t2.micro com EBS attached de 20GB na rede privada
+   * Subir 1 instância EC2 t2.micro com EBS attached de 20GB na rede pública
    
 `vpc.tf`: Responsável por criar a VPC e também subnets Pública e Privada
 
