@@ -1,0 +1,30 @@
+---
+- name: Instalacao e inicializacao do Httpd (Apache).
+  hosts: INSERIR HOSTS
+  become: true
+  vars:
+   server_name: exemplo.com.br
+
+  tasks:
+  - name: "Tarefa 1 - Instalacao do Apache(Httpd)"
+    yum: name=httpd state=latest update_cache=yes
+
+  - name: "Tarefa 2 - Configuracao do Virtual Host"
+    template: src=/templates/ansible/apache/exemplo.com.br.conf dest=/etc/httpd/conf.d/exemplo.com.br.conf owner=apache group=apache mode=0644
+
+  - name: "Tarefa 4 - Criacao do diretorio do site, caso nao exista."
+    file: path=/www/SEU-SITE/ state=directory owner=apache group=apache mode=0744
+
+  - name: "Tarefa 5 - Criacao do Index.html"
+    copy: src=/templates/ansible/apache/index-exemplo.html dest=/www/SEU-SITE/index.html owner=apache group=apache mode=0644
+
+    notify:
+    - restart apache
+
+  - name: "Tarefa 6 - Start do Httpd (Apache2)"
+    service: name=httpd state=started
+
+  handlers:
+  - name: restart apache
+    service: name=httpd state=restarted
+
